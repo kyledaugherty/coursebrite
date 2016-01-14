@@ -6,6 +6,18 @@ en:
       with_weekday:
         "%a %m/%d/%y"
 
+  layouts:
+    application:
+      sign_in: "Sign in"
+      sign_out: "Sign out"
+      title: Coursebrite
+
+  sessions:
+    flashes:
+      failure_after_create: "Invalid email or password."
+    new:
+      sign_in: "Sign in"
+
   time:
     formats:
       default:
@@ -14,6 +26,3 @@ en:
         "%b %-d, %Y"
       short:
         "%B %d"
-
-  titles:
-    application: Coursebrite
