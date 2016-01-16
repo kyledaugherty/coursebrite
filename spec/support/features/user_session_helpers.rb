@@ -1,6 +1,8 @@
 module Features
   def expect_user_to_be_signed_in
-    expect(page).to have_selector(:link_or_button, t("layouts.application.sign_out"))
+    expect(page).to have_selector(
+      :link_or_button, t("layouts.application.sign_out")
+    )
   end
 
   def expect_user_to_be_signed_out

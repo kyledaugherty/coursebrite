@@ -12,6 +12,11 @@ en:
       sign_out: "Sign out"
       title: Coursebrite
 
+  passwords:
+    new:
+      reset_cta: "Send password reset instructions"
+    reset: "Reset your password"
+
   registrations:
     join: "Join Coursebrite"
     new:
