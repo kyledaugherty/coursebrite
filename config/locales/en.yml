@@ -12,6 +12,11 @@ en:
       sign_out: "Sign out"
       title: Coursebrite
 
+  registrations:
+    join: "Join Coursebrite"
+    new:
+      create_account_cta: "Create account"
+
   sessions:
     flashes:
       failure_after_create: "Invalid email or password."
