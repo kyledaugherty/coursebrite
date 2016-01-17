@@ -1,64 +1,108 @@
 require "rails_helper"
 
+include StubCurrentUserHelpers
+
 describe CoursesController do
   describe "GET #new" do
-    it "assigns a new course as @course" do
-      get :new
-
-      expect(assigns(:course)).to be_new_record
+    context "when a logged out user requests it" do
+      it { requires_signed_in_user_to { get :new } }
     end
 
-    it "renders the new template" do
-      get :new
+    context "when a logged in user requests it" do
+      it "assigns a new course as @course" do
+        user = mock_model("User")
+        stub_current_user_with(user)
 
-      expect(response).to render_template(:new)
-    end
+        get :new
 
-    it "responds successfully with 200 status code" do
-      get :new
+        expect(assigns(:course)).to be_new_record
+      end
 
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+      it "renders the new template" do
+        user = mock_model("User")
+        stub_current_user_with(user)
+
+        get :new
+
+        expect(response).to render_template(:new)
+      end
+
+      it "responds successfully with 200 status code" do
+        user = mock_model("User")
+        stub_current_user_with(user)
+
+        get :new
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new course" do
-        expect{
+    context "when logged out" do
+      it { requires_signed_in_user_to { post :create, attributes_for(:course) } }
+    end
+
+    context "when logged in" do
+      context "with valid params" do
+        it "creates a new course" do
+          user = mock_model("User")
+          stub_current_user_with(user)
+
+          expect{
+            post :create, course: attributes_for(:course)
+          }.to change(Course, :count).by(1)
+        end
+
+        it "sets the flash success" do
+          user = mock_model("User")
+          stub_current_user_with(user)
+
           post :create, course: attributes_for(:course)
-        }.to change(Course, :count).by(1)
-      end
 
-      it "sets the flash success" do
-        post :create, course: attributes_for(:course)
-
-        expect(flash[:success]).to include "created successfully"
+          expect(flash[:success]).to include "created successfully"
+        end
       end
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested course as @course" do
-      course = create(:course)
-      get :show, id: course
-
-      expect(assigns(:course)).to eq(course)
+    context "when a logged out user requests it" do
+      it { requires_signed_in_user_to { get :show, id: 1 } }
     end
 
-    it "renders the show template" do
-      course = create(:course)
-      get :show, id: course
+    context "when a logged in user requests it" do
+      it "assigns the requested course as @course" do
+        user = mock_model("User")
+        stub_current_user_with(user)
+        course = create(:course)
+        
+        get :show, id: course
 
-      expect(response).to render_template(:show)
-    end
+        expect(assigns(:course)).to eq(course)
+      end
 
-    it "responds successfully with 200 status code" do
-      course = create(:course)
-      get :show, id: course
+      it "renders the show template" do
+        user = mock_model("User")
+        stub_current_user_with(user)
+        course = create(:course)
+        
+        get :show, id: course
 
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+        expect(response).to render_template(:show)
+      end
+
+      it "responds successfully with 200 status code" do
+        user = mock_model("User")
+        stub_current_user_with(user)
+        course = create(:course)
+        
+        get :show, id: course
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
     end
   end
 end
