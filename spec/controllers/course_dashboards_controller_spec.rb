@@ -13,7 +13,7 @@ describe CourseDashboardsController do
         user = mock_model("User")
         stub_current_user_with(user)
         course = create(:course)
-        
+
         get :show, course_id: course
 
         expect(assigns(:dashboard)).to_not be_nil
@@ -33,7 +33,7 @@ describe CourseDashboardsController do
         user = mock_model("User")
         stub_current_user_with(user)
         course = create(:course)
-        
+
         get :show, course_id: course
 
         expect(response).to be_success

@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @course = Course.new
   end
@@ -8,8 +8,8 @@ class CoursesController < ApplicationController
   def create
     @course = build_course
     if @course.save
-      redirect_to course_dashboard_path(@course), 
-        flash: { success: "Course was created successfully." }
+      redirect_to course_dashboard_path(@course),
+                  flash: { success: "Course was created successfully." }
     else
       render :new
     end

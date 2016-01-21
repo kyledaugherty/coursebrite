@@ -86,7 +86,7 @@ describe CoursesController do
         user = mock_model("User")
         stub_current_user_with(user)
         course = create(:course)
-        
+
         get :show, id: course
 
         expect(assigns(:course)).to eq(course)
@@ -106,7 +106,7 @@ describe CoursesController do
         user = mock_model("User")
         stub_current_user_with(user)
         course = create(:course)
-        
+
         get :show, id: course
 
         expect(response).to be_success

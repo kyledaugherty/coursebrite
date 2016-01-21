@@ -2,6 +2,9 @@ require "rails_helper"
 
 feature "User creates a course" do
   scenario "successfully" do
+    user = create(:user)
+
+    login_as(user)
     visit new_course_path
     create_course_with_title("A new course")
 
