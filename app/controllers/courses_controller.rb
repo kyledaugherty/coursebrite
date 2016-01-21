@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   def create
     @course = build_course
     if @course.save
-      redirect_to course_path(@course), 
+      redirect_to course_dashboard_path(@course), 
         flash: { success: "Course was created successfully." }
     else
       render :new

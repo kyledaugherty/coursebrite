@@ -55,6 +55,15 @@ describe CoursesController do
           }.to change(Course, :count).by(1)
         end
 
+        it "redirects to the course dashboard page" do
+          user = mock_model("User")
+          stub_current_user_with(user)
+
+          post :create, course: attributes_for(:course)
+
+          expect(response).to redirect_to(course_dashboard_path(Course.last))
+        end
+
         it "sets the flash success" do
           user = mock_model("User")
           stub_current_user_with(user)
@@ -87,7 +96,7 @@ describe CoursesController do
         user = mock_model("User")
         stub_current_user_with(user)
         course = create(:course)
-        
+
         get :show, id: course
 
         expect(response).to render_template(:show)
