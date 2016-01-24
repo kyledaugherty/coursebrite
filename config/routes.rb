@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :courses, only: [:new, :create, :show] do
     resource :course_dashboard, only: [:show], as: :dashboard, path: :dashboard
+    resource :publication, only: [:create, :destroy]
   end
 
   root to: "landing#show"

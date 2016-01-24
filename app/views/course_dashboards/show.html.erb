@@ -1,6 +1,16 @@
 <div class="container">
   <div class="row">
     <h2><%= @dashboard.course.title %> Course Dashboard</h2>
+    <% if @dashboard.course.published? %>
+      <%= link_to "Unpublish",
+                  course_publication_path,
+                  method: :delete %>
+    <% else %>
+      <%= link_to "Make Course Live",
+                  course_publication_path,
+                  class: "btn btn-success",
+                  method: :post %>
+    <% end %>
   </div>
 </div>
 
