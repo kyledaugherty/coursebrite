@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="organization-form">
+      <h2>Create an organization</h2>
+      <%= simple_form_for(@organization) do |f| %>
+        <%= f.input :login, label: "Organization name", required: true, autofocus: true %>
+        <%= f.button :submit, class: "btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,10 @@ FactoryGirl.define do
     title "A title"
   end
 
+  factory :organization do
+    login "foobar"
+  end
+
   factory :user do
     email
     password "password123"
