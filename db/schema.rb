@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215052037) do
+ActiveRecord::Schema.define(version: 20160219002252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 20160215052037) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "joinable_id",               null: false
+    t.string   "joinable_type", limit: 255, null: false
+    t.integer  "member_id",                 null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "memberships", ["joinable_id", "joinable_type"], name: "index_memberships_on_joinable_id_and_joinable_type", using: :btree
+  add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
 
   create_table "organizations", force: :cascade do |t|
     t.string   "login",      limit: 255, null: false

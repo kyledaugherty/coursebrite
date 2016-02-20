@@ -8,6 +8,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = build_organization
     if @organization.save
+      current_user.organizations << @organization
       redirect_to organization_dashboard_path(@organization),
                   flash: { success: "Organization was created successfully." }
     else

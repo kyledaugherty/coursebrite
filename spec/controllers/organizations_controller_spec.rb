@@ -46,27 +46,29 @@ describe OrganizationsController do
 
     context "when logged in" do
       context "with valid params" do
-        it "creates a new organization" do
-          user = mock_model("User")
-          stub_current_user_with(user)
+        it "creates a new organization for the current user" do
+          user = create(:user)
+          sign_in user
 
-          expect{
+          expect do
             post :create, organization: attributes_for(:organization)
-          }.to change(Organization, :count).by(1)
+          end.to change(user.organizations, :count).by(1)
         end
 
         it "redirects to the organization dashboard page" do
-          user = mock_model("User")
-          stub_current_user_with(user)
+          user = create(:user)
+          sign_in user
 
           post :create, organization: attributes_for(:organization)
 
-          expect(response).to redirect_to(organization_dashboard_path(Organization.last))
+          expect(response).to redirect_to(
+            organization_dashboard_path(user.organizations.last)
+          )
         end
 
         it "sets the flash success" do
-          user = mock_model("User")
-          stub_current_user_with(user)
+          user = create(:user)
+          sign_in user
 
           post :create, organization: attributes_for(:organization)
 
