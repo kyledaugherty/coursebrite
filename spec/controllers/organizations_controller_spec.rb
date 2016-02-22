@@ -55,6 +55,15 @@ describe OrganizationsController do
           end.to change(user.organizations, :count).by(1)
         end
 
+        it "makes the current user the default admin" do
+          user = create(:user)
+          sign_in user
+
+          post :create, organization: attributes_for(:organization)
+
+          expect(user.has_role? :admin, Organization.last).to eq true
+        end
+
         it "redirects to the organization dashboard page" do
           user = create(:user)
           sign_in user

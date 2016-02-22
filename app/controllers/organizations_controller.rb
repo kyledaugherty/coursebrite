@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!
+  after_action :skip_authorization, only: [:new, :create]
   
   def new
     @organization = Organization.new
@@ -8,7 +9,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = build_organization
     if @organization.save
-      current_user.organizations << @organization
+      @organization.add_member_with_role(current_user, :admin)
       redirect_to organization_dashboard_path(@organization),
                   flash: { success: "Organization was created successfully." }
     else
