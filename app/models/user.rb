@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :trackable, 
          :validatable
 
+  rolify
+
   has_many :memberships, foreign_key: :member_id, dependent: :destroy
   has_many  :organizations,
             through: :memberships,
