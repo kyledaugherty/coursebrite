@@ -4,7 +4,8 @@ class Role < ActiveRecord::Base
 
   validates :name, presence: true
   validates :resource_type,
-            inclusion: { in: Rolify.resource_types }
+            inclusion: { in: Rolify.resource_types },
+            :allow_nil => true
 
   scopify
 end
