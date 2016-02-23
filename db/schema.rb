@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20160221235543) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255, null: false
-    t.integer  "resource_id",               null: false
-    t.string   "resource_type", limit: 255, null: false
+    t.integer  "resource_id"
+    t.string   "resource_type", limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

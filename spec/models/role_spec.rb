@@ -8,6 +8,4 @@ describe Role do
       in_array(Rolify.resource_types)
   end
   it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:resource_id) }
-  it { should validate_presence_of(:resource_type) }
 end

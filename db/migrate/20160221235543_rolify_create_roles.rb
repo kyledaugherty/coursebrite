@@ -2,8 +2,8 @@ class RolifyCreateRoles < ActiveRecord::Migration
   def change
     create_table(:roles) do |t|
       t.string :name, limit: 255, null: false
-      t.integer :resource_id, null: false
-      t.string :resource_type, limit: 255, null: false
+      t.integer :resource_id
+      t.string :resource_type, limit: 255
 
       t.timestamps null: false
     end
