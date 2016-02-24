@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
+  after_action :skip_authorization
 
   def new
     @course = Course.new

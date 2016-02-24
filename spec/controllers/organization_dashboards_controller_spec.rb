@@ -1,5 +1,6 @@
 require "rails_helper"
 
+include MockAuthorizationPolicyHelpers
 include StubCurrentUserHelpers
 
 describe OrganizationDashboardsController do
@@ -13,6 +14,7 @@ describe OrganizationDashboardsController do
         user = mock_model("User")
         stub_current_user_with(user)
         organization = create(:organization)
+        mock_authorization_policy(OrganizationDashboardPolicy, :show?)
 
         get :show, organization_id: organization
 
@@ -23,6 +25,7 @@ describe OrganizationDashboardsController do
         user = mock_model("User")
         stub_current_user_with(user)
         organization = create(:organization)
+        mock_authorization_policy(OrganizationDashboardPolicy, :show?)
 
         get :show, organization_id: organization
 
@@ -33,6 +36,7 @@ describe OrganizationDashboardsController do
         user = mock_model("User")
         stub_current_user_with(user)
         organization = create(:organization)
+        mock_authorization_policy(OrganizationDashboardPolicy, :show?)
 
         get :show, organization_id: organization
 

@@ -61,7 +61,7 @@ describe OrganizationsController do
 
           post :create, organization: attributes_for(:organization)
 
-          expect(user.has_role? :admin, Organization.last).to eq true
+          expect(user.has_role?(:admin, Organization.last)).to eq true
         end
 
         it "redirects to the organization dashboard page" do
